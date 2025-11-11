@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     
     # third party apps
-    'django redis',
+    'django_redis',
     
     # local apps
     'properties',
@@ -93,16 +93,15 @@ DATABASES = {
 }
 
 # Redis as cache backend (django-redis)
+REDIS_URL = os.environ.get("REDIS_URL", "redis://localhost:6379/1")
+
 CACHES = {
     "default": {
         "BACKEND": "django_redis.cache.RedisCache",
-        # If Django runs in Docker, use redis://redis:6379/1
-        # If running locally (not in docker) set host to localhost
-        "LOCATION": os.environ.get('REDIS_URL', "redis://redis:6379/1"),
+        "LOCATION": REDIS_URL,
         "OPTIONS": {
             "CLIENT_CLASS": "django_redis.client.DefaultClient",
-            # "PASSWORD": os.environ.get("REDIS_PASSWORD", None),  # if you set one
-        }
+        },
     }
 }
 

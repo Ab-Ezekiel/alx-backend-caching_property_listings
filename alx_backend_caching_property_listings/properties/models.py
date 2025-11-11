@@ -2,7 +2,7 @@ from django.db import models
 
 # Create your models here.
 
-class property(models.Model):
+class Property(models.Model):
     title = models.CharField(max_length=200)
     description = models.TextField()
     price = models.DecimalField(max_digits=10, decimal_places=2)
@@ -10,5 +10,5 @@ class property(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f"{self.title} - {self.location} - ${self.price}"
+        return f"{self.title} - {self.location}  (${self.price})"
     
