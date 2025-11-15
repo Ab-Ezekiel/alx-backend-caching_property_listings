@@ -15,4 +15,4 @@ def property_list(request):
         'id', 'title', 'description', 'price', 'location', 'created_at'
     )
     # values() returns a QuerySet of dicts which JsonResponse can serialize
-    return JsonResponse(list(qs), safe=False)
+    return JsonResponse({"data": list(qs)}, safe=False)
