@@ -1,4 +1,3 @@
-
 services:
   db:
     image: postgres:latest
@@ -8,9 +7,19 @@ services:
       POSTGRES_USER: property_user
       POSTGRES_PASSWORD: property_pass
     ports:
-      - "5433:5432"
+      - "5433:5432"             # keep 5433 if you want host Postgres to remain untouched
     volumes:
-      - pgdata_fresh:/var/lib/postgresql
+      - postgres_data:/var/lib/postgresql
+
+  redis:
+    image: redis:latest
+    restart: always
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    command: ["redis-server", "--save", "60", "1"]
 
 volumes:
-  pgdata_fresh:
+  postgres_data:
+  redis_data:
